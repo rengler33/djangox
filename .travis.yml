@@ -9,8 +9,5 @@ services:
 
 before_script: pip install docker-compose
 
-install:
-  - pipenv install --dev
-
 script:
   - docker-compose run web sh -c "python manage.py test && flake8"
