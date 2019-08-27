@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 django-debug-toolbar = "==2.0"
 flake8 = "*"
+black = "*"
 
 [packages]
 django = "==2.2.4"
@@ -16,3 +17,6 @@ loguru = "==0.3.2"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
