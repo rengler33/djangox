@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "crispy_forms",
     # Local
-    "apps.users.apps.UsersConfig",
-    "apps.pages.apps.PagesConfig",
+    "users.apps.UsersConfig",
+    "pages.apps.PagesConfig",
 ]
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
