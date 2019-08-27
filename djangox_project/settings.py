@@ -11,11 +11,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Load environment variables
 env = environ.Env(DEBUG=(bool, False))
 ENV_CONTROLLER = os.environ.get("ENV_CONTROLLER")
-PRODUCTION_ENV_PATH = BASE_DIR + "/env/production.env"
 LOCAL_ENV_PATH = BASE_DIR + "/env/local.env"
 if ENV_CONTROLLER == "production":
-    logger.info(f"Loading production environment variables from {PRODUCTION_ENV_PATH}")
-    env.read_env(PRODUCTION_ENV_PATH)
+    logger.info(f"Loading production environment variables.")
 else:
     logger.info(f"Loading local environment variables from {LOCAL_ENV_PATH}")
     env.read_env(LOCAL_ENV_PATH)
