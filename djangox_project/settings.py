@@ -158,6 +158,11 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+# Django admin URL
+ADMIN_URL = env("DJANGO_ADMIN_URL")
+
+
 # Django-Allauth Config
 
 LOGIN_REDIRECT_URL = 'home'
