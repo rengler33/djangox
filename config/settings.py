@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Load environment variables
 env = environ.Env(DEBUG=(bool, False), USE_SQLITE=(bool, False))
 ENV_CONTROLLER = os.environ.get("ENV_CONTROLLER")
-LOCAL_ENV_PATH = BASE_DIR + "/env/local.env"
+LOCAL_ENV_PATH = BASE_DIR + "/.envs/local.env"
 if ENV_CONTROLLER == "production":
     logger.info(f"Loading production environment variables.")
 else:
@@ -58,7 +58,7 @@ MIDDLEWARE = [
 if DEBUG:
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
-ROOT_URLCONF = "djangox_project.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "djangox_project.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
