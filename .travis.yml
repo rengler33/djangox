@@ -1,11 +1,15 @@
 language: python
 python:
   - "3.7"
+  dist: xenial
 
 services:
   - docker
 
 before_script: pip install docker-compose
+
+install:
+  - pipenv install --dev
 
 script:
   - docker-compose run web sh -c "python manage.py test && flake8"
