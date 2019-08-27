@@ -57,12 +57,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+if DEBUG:
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = 'djangox_project.urls'
 
@@ -88,12 +89,15 @@ WSGI_APPLICATION = 'djangox_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if ENV_CONTROLLER == 'production':
+    DATABASES = {"default": env.db()}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 
 # Password validation
@@ -142,6 +146,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Enabled for django-debug-toolbar to work
 # https://docs.djangoproject.com/en/2.2/ref/settings/#internal-ips
 INTERNAL_IPS = ['127.0.0.1']
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
+if env("USE_DOCKER") == "yes" and DEBUG:
+    import socket
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
+
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
