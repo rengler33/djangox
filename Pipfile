@@ -4,12 +4,15 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+django-debug-toolbar = "==2.0"
+flake8 = "*"
 
 [packages]
 django = "==2.2.4"
 django-allauth = "==0.39.1"
 django-crispy-forms = "==1.7.2"
-django-debug-toolbar = "==2.0"
+django-environ = "==0.4.5"
+loguru = "==0.3.2"
 
 [requires]
 python_version = "3.7"
