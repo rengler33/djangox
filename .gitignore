@@ -21,6 +21,5 @@ djangox_project/staticfiles/
 *$py.class
 
 # Environments
-.env
-env/
+*.env
 
