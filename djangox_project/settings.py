@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Load environment variables
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env(DEBUG=(bool, False), USE_SQLITE=(bool, False))
 ENV_CONTROLLER = os.environ.get("ENV_CONTROLLER")
 LOCAL_ENV_PATH = BASE_DIR + "/env/local.env"
 if ENV_CONTROLLER == "production":
@@ -27,7 +27,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -81,22 +80,18 @@ WSGI_APPLICATION = "djangox_project.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-if ENV_CONTROLLER == "production":
-    DATABASES = {"default": env.db()}
-else:
+if env("USE_SQLITE"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
+else:
+    DATABASES = {"default": env.db()}
 
 
 # Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
@@ -109,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -128,6 +122,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 # Enabled for django-debug-toolbar to work
 # https://docs.djangoproject.com/en/2.2/ref/settings/#internal-ips
@@ -150,7 +145,6 @@ DJANGO_ADMIN_URL = env("DJANGO_ADMIN_URL")
 
 
 # Django-Allauth Config
-
 LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 
