@@ -45,12 +45,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'crispy_forms',
-    'debug_toolbar',
 
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
 ]
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
