@@ -118,16 +118,27 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 STATIC_URL = "/apps/static/"
+
+# local development
 STATICFILES_DIRS = [os.path.join(APPS_DIR, "static")]
 
+# production
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
+# django-crispy-forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 # Enabled for django-debug-toolbar to work
 # https://docs.djangoproject.com/en/2.2/ref/settings/#internal-ips
-INTERNAL_IPS = ["127.0.0.1"]
+if DEBUG:
+    INTERNAL_IPS = ["127.0.0.1"]
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 if env("USE_DOCKER") == "yes" and DEBUG:
     import socket
@@ -138,10 +149,11 @@ if env("USE_DOCKER") == "yes" and DEBUG:
 
 AUTH_USER_MODEL = "users.CustomUser"
 
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-# Django admin URL
+# Django admin URL adjustment
 DJANGO_ADMIN_URL = env("DJANGO_ADMIN_URL")
 
 
@@ -162,6 +174,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
 
 # Django Messaging framework
 MESSAGE_LEVEL = messages.SUCCESS
