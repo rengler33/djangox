@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: local.Dockerfile
+    command: sh -c "python /code/manage.py migrate &&       
+              python /code/manage.py runserver 0.0.0.0:8000"
+    environment:
+      - ENV_CONTROLLER=production
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:11
