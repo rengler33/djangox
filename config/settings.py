@@ -154,7 +154,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = "admin@updateme.com"
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 
 # Django admin URL adjustment
