@@ -10,7 +10,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APPS_DIR = os.path.join(BASE_DIR, "apps")
 
 # Load environment variables
-env = environ.Env(DEBUG=(bool, False), USE_SQLITE=(bool, False))
+env = environ.Env(
+    DEBUG=(bool, False), USE_SQLITE=(bool, False), USE_MAILGUN=(bool, False)
+)
 ENV_CONTROLLER = os.environ.get("ENV_CONTROLLER")
 LOCAL_ENV_PATH = BASE_DIR + "/.envs/local.env"
 if ENV_CONTROLLER == "production":
@@ -95,6 +97,10 @@ else:
     DATABASES = {"default": env.db()}
 
 
+# Custom user model
+AUTH_USER_MODEL = "users.CustomUser"
+
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,31 +113,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = False
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 STATIC_URL = "/apps/static/"
-
-# local development
-STATICFILES_DIRS = [os.path.join(APPS_DIR, "static")]
-
-# production
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [os.path.join(APPS_DIR, "static")]  # local development
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # production
 
 
 # django-crispy-forms
@@ -150,12 +146,23 @@ if env("USE_DOCKER") == "yes" and DEBUG:
     INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
 
 
-AUTH_USER_MODEL = "users.CustomUser"
-
-
+# Email
+# ------------------------------------------------------------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+SERVER_EMAIL = env("SERVER_EMAIL")
 
+# Anymail (Mailgun)
+# note that anymail builds the full API url for you
+if env("USE_MAILGUN"):
+    INSTALLED_APPS += ["anymail"]
+    EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+    ANYMAIL = {
+        "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
+        "MAILGUN_SENDER_DOMAIN": env("MAILGUN_DOMAIN"),
+        "MAILGUN_API_URL": env("MAILGUN_BASE_API_URL"),
+        "MAILGUN_WEBHOOK_SIGNING_KEY": env("MAILGUN_WEBHOOK_SIGNING_KEY"),
+    }
 
 # Django admin URL adjustment
 DJANGO_ADMIN_URL = env("DJANGO_ADMIN_URL")
