@@ -2,6 +2,8 @@
 
 ## Adapted from wsvincent/djangox for my own projects
 
+### Setup
+
 Need to run:
 
 ```shell
@@ -17,7 +19,9 @@ docker-compose exec web "python manage.py makemigrations users"
 docker-compose exec web "python manage.py migrate"
 ```
 
-Recommended settings for vscode:
+When adding an email service, you will want to update the `DEFAULT_FROM_EMAIL` setting as well as the domain name and display name in the sites table created by all-auth.
+
+### Recommended settings for vscode
 
 ```javascript
 "settings": {
