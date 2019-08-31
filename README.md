@@ -1,5 +1,7 @@
 # README.md
 
+## Adapted from wsvincent/djangox for my own projects
+
 Need to run:
 
 ```shell
