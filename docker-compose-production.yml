@@ -4,7 +4,7 @@ services:
   web:
     build: 
       context: .
-      dockerfile: local.Dockerfile
+      dockerfile: production.Dockerfile
     command: sh -c "python /code/manage.py migrate &&       
               python /code/manage.py runserver 0.0.0.0:8000"
     environment:
