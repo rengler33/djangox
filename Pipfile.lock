@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ad191c1c4c993d2224c6f42d62a377839d71ce9453317947b8c46c862f7ca09c"
+            "sha256": "13c8e20e297170995d567a78398abdba7a5179b26fe0c6983ca03f61c8ba9386"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,11 +39,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:16a5d54411599780ac9dfe3b9b38f90f785c51259a584e0b24b6f14a7f69aae8",
-                "sha256:9a2f98211ab474c710fcdad29c82f30fc14ce9917c7a70c3682162a624de4035"
+                "sha256:148a4a2d1a85b23883b0a4e99ab7718f518a83675e4485e44dc0c1d36988c5fa",
+                "sha256:deb70aa038e59b58593673b15e9a711d1e5ccd941b5973b30750d5d026abfd56"
             ],
             "index": "pypi",
-            "version": "==2.2.4"
+            "version": "==2.2.5"
         },
         "django-allauth": {
             "hashes": [
@@ -57,10 +57,11 @@
                 "mailgun"
             ],
             "hashes": [
-                "sha256:d079ae0d007503de7f57a0e3eceffe21eb264b7d9e227e6c398cacdb41f20580"
+                "sha256:72549db8823c144a334bf88c8e749becb1fc82911658129549f46bfb84de311c",
+                "sha256:947c9c5de009036771ff9c4295da1836c950fdee4d7c27441181ce1021c370a8"
             ],
             "index": "pypi",
-            "version": "==1.2"
+            "version": "==6.1.0"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -224,11 +225,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:16a5d54411599780ac9dfe3b9b38f90f785c51259a584e0b24b6f14a7f69aae8",
-                "sha256:9a2f98211ab474c710fcdad29c82f30fc14ce9917c7a70c3682162a624de4035"
+                "sha256:148a4a2d1a85b23883b0a4e99ab7718f518a83675e4485e44dc0c1d36988c5fa",
+                "sha256:deb70aa038e59b58593673b15e9a711d1e5ccd941b5973b30750d5d026abfd56"
             ],
             "index": "pypi",
-            "version": "==2.2.4"
+            "version": "==2.2.5"
         },
         "django-debug-toolbar": {
             "hashes": [
