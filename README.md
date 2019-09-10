@@ -28,6 +28,13 @@ You can generate a new secret key from inside the django shell with the followin
 >>> get_random_secret_key()
 ```
 
+When generating files in the volume via docker exec (such as `startapp`), you'll need to change ownership of the directory/files.  It's common to have a docker group.
+
+```shell
+sudo chown -R <user>:<group> <file|dir>
+```
+
+
 ### Recommended settings for vscode
 
 ```javascript
